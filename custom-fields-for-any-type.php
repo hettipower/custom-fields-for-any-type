@@ -14,3 +14,7 @@ define( 'CFFAPT_PATH', plugin_dir_path( __FILE__ ) );
 
 //Settings Options
 require_once CFFAPT_PATH.'/admin/options/admin_options.php';
+//Custom Meta Fields
+require_once CFFAPT_PATH.'/admin/meta-fields/custom_meta_fields.php';
+//Admin Scripts
+require_once CFFAPT_PATH.'/admin/scripts/admin_scripts.php';
