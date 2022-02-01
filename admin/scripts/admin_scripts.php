@@ -10,7 +10,11 @@ function cffapt_enqueue_admin_script( $hook ) {
     $screen = get_current_screen();
 
     if( in_array( $screen->id , $cffapt_post_types ) ) {
-        wp_enqueue_script( 'cffapt-admin', CFFAPT_PATH . '/admin/assets/js/cffapt-admin-post.js', array(), '1.0' );
+        wp_enqueue_script( 'repeater', CFFAPT_URL . 'admin/assets/js/jquery.repeater.min.js', array(), '1.0' );
+        wp_enqueue_script( 'cffapt-admin', CFFAPT_URL . 'admin/assets/js/cffapt-admin-post.js', array(), '1.0' );
+
+        wp_register_style( 'cffapt_admin_css', CFFAPT_URL . 'admin/assets/css/cffapt-admin-post.css', false, '1.0.0' );
+        wp_enqueue_style( 'cffapt_admin_css' );
     }
 
 }
