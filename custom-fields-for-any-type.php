@@ -11,3 +11,6 @@ Text Domain: cffapt
 
 defined( 'ABSPATH' ) or exit;
 define( 'CFFAPT_PATH', plugin_dir_path( __FILE__ ) );
+
+//Settings Options
+require_once CFFAPT_PATH.'/admin/options/admin_options.php';
