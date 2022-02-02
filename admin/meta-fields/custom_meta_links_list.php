@@ -33,17 +33,6 @@ class CFFAPT_Link_List {
                 );
             }
         }
-
-		/* foreach ( $this->config['post-type'] as $screen ) {
-			add_meta_box(
-				sanitize_title( $this->config['title'] ),
-				$this->config['title'],
-				[ $this, 'add_meta_box_callback' ],
-				$screen,
-				$this->config['context'],
-				$this->config['priority']
-			);
-		} */
 	}
 
 	public function save_post( $post_id ) {
@@ -51,22 +40,7 @@ class CFFAPT_Link_List {
         if ( isset( $_POST['list_link'] ) ) {
             update_post_meta( $post_id, 'cffapt_list_link', $_POST['list_link'] );
         }
-
-		/* foreach ( $this->config['fields'] as $field ) {
-			switch ( $field['type'] ) {
-				case 'url':
-					if ( isset( $_POST[ $field['id'] ] ) ) {
-						$sanitized = esc_url_raw( $_POST[ $field['id'] ] );
-						update_post_meta( $post_id, $field['id'], $sanitized );
-					}
-					break;
-				default:
-					if ( isset( $_POST[ $field['id'] ] ) ) {
-						$sanitized = sanitize_text_field( $_POST[ $field['id'] ] );
-						update_post_meta( $post_id, $field['id'], $sanitized );
-					}
-			}
-		} */
+		
 	}
 
 	public function add_meta_box_callback() {
