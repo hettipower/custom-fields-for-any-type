@@ -19,11 +19,21 @@
 }
 .repeaterWrap .repeaterItemWrap .fieldsWrap .field {
     margin-bottom: 1rem;
+    width: 100%;
 }
-.repeaterWrap .repeaterItemWrap .fieldsWrap .field label {
+.repeaterWrap .repeaterItemWrap .fieldsWrap .field label , .repeaterWrap .repeaterItemWrap .fieldsWrap .field .label {
     font-weight: 700;
     margin-bottom: 6px;
     display: inline-block;
+}
+.repeaterWrap .repeaterItemWrap .fieldsWrap .field .contorl {
+    display: flex;
+}
+.repeaterWrap .repeaterItemWrap .fieldsWrap .field .contorl .rwp-media-toggle {
+    margin-left: 1rem;
+}
+.repeaterWrap .repeaterItemWrap .fieldsWrap .field .contorl .wp-editor-wrap {
+    width: 100%;
 }
 .repeaterWrap .repeaterItemWrap .fieldsWrap .field .contorl .regular-text {
     width: 100%;
