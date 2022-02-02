@@ -8,7 +8,7 @@
  * Link = get_post_meta( get_the_ID(), 'cffapt_link', true )
  */
 class CFFAPT_Link_List {
-	private $config = '{"title":"Link List","prefix":"cffapt_","domain":"cffapt","class_name":"CFFAPT_Link_List","post-type":["page"],"context":"normal","priority":"default","fields":[{"type":"text","label":"Title","id":"cffapt_title"},{"type":"url","label":"Link","id":"cffapt_link"}]}';
+	private $config = '{"title":"Link List Repeater","prefix":"cffapt_","domain":"cffapt","class_name":"CFFAPT_Link_List","post-type":["page"],"context":"normal","priority":"default","fields":[{"type":"text","label":"Title","id":"cffapt_title"},{"type":"url","label":"Link","id":"cffapt_link"}]}';
 
 	public function __construct() {
 		$this->config = json_decode( $this->config, true );
@@ -107,7 +107,7 @@ class CFFAPT_Link_List {
                     </div>
                     <?php $i++; endforeach; endif; ?>
                 <?php else: ?>
-                    <div data-repeater-item class="repeaterItem">
+                    <div data-repeater-item class="repeaterItemWrap">
                         <div class="fieldsWrap">
                             <?php foreach ( $this->config['fields'] as $field ): ?>
                                 <div class="field">
