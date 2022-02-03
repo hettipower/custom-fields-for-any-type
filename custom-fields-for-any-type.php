@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Custom Fields for any Post Type
+Plugin Name: CPT Products Display
 Plugin URI: https://github.com/hettipower
 Description: Add Custom Fields for any selected post type. Post Type can be selected manualy 
 Version: 1.0
@@ -18,5 +18,11 @@ require_once CFFAPT_PATH.'/admin/options/admin_options.php';
 //Custom Meta Fields
 require_once CFFAPT_PATH.'/admin/meta-fields/custom_meta_links_list.php';
 require_once CFFAPT_PATH.'/admin/meta-fields/custom_meta_fields.php';
+require_once CFFAPT_PATH.'/admin/meta-fields/cpt_display_shortcode_meta.php';
 //Admin Scripts
 require_once CFFAPT_PATH.'/admin/scripts/admin_scripts.php';
+//Front Scripts
+require_once CFFAPT_PATH.'/admin/scripts/front_scripts.php';
+
+//ShortCode Function
+require_once CFFAPT_PATH.'/front/cpt_shortcode.php';

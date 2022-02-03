@@ -1,0 +1,139 @@
+.listLinkWrap {
+    display: block;
+}
+.listLinkWrap ol {
+    -webkit-padding-start: 0;
+    margin: 15px 0 30px;
+    counter-reset: item;
+    list-style: none;
+    box-shadow: 0 4px 12px #000;
+    margin: 0 4px 12px;
+    border: 1px solid #ddd;
+    border-top: none;
+}
+.listLinkWrap ol li {
+    list-style: none;
+    padding: 15px 15px 15px 5px;
+    margin: 0;
+    border-top: 1px solid #ddd;
+    counter-increment: list;
+    counter-reset: list1;
+    font-size: 105%;
+}
+.listLinkWrap ol li:nth-child(2n) {
+    background-color: #f9f9f9;
+}
+.listLinkWrap ol li::before {
+    background-color: #fb7203;
+    border-radius: 50%;
+    color: #fff;
+    content: counter(item);
+    counter-increment: item;
+    float: left;
+    height: 25px;
+    line-height: 25px;
+    margin: -3px 20px 20px 15px;
+    text-align: center;
+    width: 25px;
+    font-weight: 700;
+    font-size: 16px;
+}
+.productDetailsWrap {
+    margin-top: 3rem;
+}
+.productDetailsWrap .productDisplay {
+    margin-bottom: 2rem;
+}
+.productDetailsWrap .productDisplay h3 {
+    color: #000;
+}
+.productDetailsWrap .productDisplay h3 span {
+    border-radius: 50%;
+    background: none;
+    display: block;
+    float: left;
+    font: bold 20px/38px Arial;
+    height: 38px;
+    margin: -8px 10px 10px 0;
+    text-align: center;
+    width: 38px;
+    color: #fb7203;
+    border: 3px solid #fb7203;
+    box-sizing: content-box;
+}
+.productDetailsWrap .productDisplay .imgWrap {
+    font-weight: 400 !important;
+    background: #fff;
+    font-size: 18px;
+    display: block;
+    text-align: center;
+    padding: 20px 5%;
+    box-shadow: rgba(126,157,255,.4) 0 8px 12px 0;
+    border: 2px solid rgb(223,224,226) !important;
+}
+.productDetailsWrap .productDisplay .contentWrap {
+    line-height: 1.8;
+    margin: 1rem 0 2rem;
+}
+.productDetailsWrap .productDisplay .imgWrap .btnWrap a {
+    color: #fff;
+    line-height: 20px;
+    text-decoration: none;
+    display: block !important;
+    padding: 20px;
+    background-color: #f06d1b;
+    max-width: 250px;
+    margin: auto;
+    border-radius: 0.25rem;
+}
+.productDetailsWrap .productDisplay .proCronWrap {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+.productDetailsWrap .productDisplay .proCronWrap .boxWrap {
+    width: 48%;
+    border: 2px solid transparent;
+    margin-bottom: auto;
+}
+.productDetailsWrap .productDisplay .proCronWrap .boxWrap.proBox{
+    border-color: #6f9400;
+}
+.productDetailsWrap .productDisplay .proCronWrap .boxWrap.conBox {
+    border-color: #a30000;
+}
+.productDetailsWrap .productDisplay .proCronWrap .boxWrap h4 {
+    margin: 0;
+    padding: 0.5em 1em;
+    color: #fff;
+    font-size: 22px;
+}
+.productDetailsWrap .productDisplay .proCronWrap .boxWrap.proBox h4{
+    background-color: #8bb900;
+}
+.productDetailsWrap .productDisplay .proCronWrap .boxWrap.conBox h4 {
+    background-color: #cc0000;
+}
+.productDetailsWrap .productDisplay .proCronWrap .boxWrap .boxContent {
+    padding: 1em;
+}
+.productDetailsWrap .productDisplay .proCronWrap .boxWrap .boxContent ul {
+    list-style: none;
+}
+.productDetailsWrap .productDisplay .proCronWrap .boxWrap .boxContent ul li {
+    position: relative;
+    list-style-type: none !important;
+    display: block !important;
+    line-height: 1.3em;
+    margin: 0 !important;
+    padding: 4px 0 4px 2em !important;
+}
+.productDetailsWrap .productDisplay .proCronWrap .boxWrap .boxContent ul li i {
+    position: absolute;
+    left: 0;
+    top: 4px;
+    width: 1.3em;
+    height: 1.3em;
+    line-height: 1.3em;
+    text-align: center;
+}

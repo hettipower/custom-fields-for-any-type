@@ -39,8 +39,10 @@ class CFFAPT_Post_Meta {
 		$cffapt_settings_options = get_option( 'cffapt_options' );
         $cffapt_post_types = $cffapt_settings_options['cffapt_post_types'];
 
-		if ( in_array( $typenow, $cffapt_post_types ) ) {
-			wp_enqueue_media();
+		if( $cffapt_post_types ) {
+			if ( in_array( $typenow, $cffapt_post_types ) ) {
+				wp_enqueue_media();
+			}
 		}
 	}
 
@@ -50,29 +52,31 @@ class CFFAPT_Post_Meta {
 		$cffapt_settings_options = get_option( 'cffapt_options' );
         $cffapt_post_types = $cffapt_settings_options['cffapt_post_types'];
 
-		if ( in_array( $typenow, $cffapt_post_types ) ) {
-			?><script>
-				jQuery.noConflict();
-				(function($) {
-					$(function() {
-						$('body').on('click', '.rwp-media-toggle', function(e) {
-							e.preventDefault();
-							let button = $(this);
-							let rwpMediaUploader = null;
-							rwpMediaUploader = wp.media({
-								title: button.data('modal-title'),
-								button: {
-									text: button.data('modal-button')
-								},
-								multiple: true
-							}).on('select', function() {
-								let attachment = rwpMediaUploader.state().get('selection').first().toJSON();
-								button.prev().val(attachment[button.data('return')]);
-							}).open();
+		if( $cffapt_post_types ){
+			if ( in_array( $typenow, $cffapt_post_types ) ) {
+				?><script>
+					jQuery.noConflict();
+					(function($) {
+						$(function() {
+							$('body').on('click', '.rwp-media-toggle', function(e) {
+								e.preventDefault();
+								let button = $(this);
+								let rwpMediaUploader = null;
+								rwpMediaUploader = wp.media({
+									title: button.data('modal-title'),
+									button: {
+										text: button.data('modal-button')
+									},
+									multiple: true
+								}).on('select', function() {
+									let attachment = rwpMediaUploader.state().get('selection').first().toJSON();
+									button.prev().val(attachment[button.data('return')]);
+								}).open();
+							});
 						});
-					});
-				})(jQuery);
-			</script><?php
+					})(jQuery);
+				</script><?php
+			}
 		}
 	}
 
