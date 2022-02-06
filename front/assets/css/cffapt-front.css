@@ -77,14 +77,24 @@
 }
 .productDetailsWrap .productDisplay .imgWrap .btnWrap a {
     color: #fff;
-    line-height: 20px;
+    line-height: 26px;
     text-decoration: none;
-    display: block !important;
+    display: inline-block !important;
     padding: 20px;
     background-color: #f06d1b;
-    max-width: 250px;
+    min-width: 250px;
     margin: auto;
     border-radius: 0.25rem;
+    text-transform: uppercase;
+    text-shadow: #e81e2c 0 1px 0;
+    font-size: 25px;
+}
+.productDetailsWrap .productDisplay .imgWrap .btnWrap a:hover {
+    background-color: #ff4500;
+}
+.productDetailsWrap .productDisplay .imgWrap .btnWrap a i {
+    transform: rotate(-45deg);
+    margin-right: 5px;
 }
 .productDetailsWrap .productDisplay .proCronWrap {
     margin-top: 2rem;
@@ -136,4 +146,24 @@
     height: 1.3em;
     line-height: 1.3em;
     text-align: center;
+}
+.productDetailsWrap .productDisplay .imgWrap .ratingWrap {
+    margin: 20px 0;
+}
+.productDetailsWrap .productDisplay .imgWrap .ratingWrap .ratings {
+    color: #5e5e5e;
+    position: relative;
+    margin: 0 4px;
+}
+.productDetailsWrap .productDisplay .imgWrap .ratingWrap .ratings .starActive {
+    position: absolute;
+    left: 0;
+    top: 3px;
+    height: 100%;
+    display: flex;
+    color: #ffd800;
+    overflow: hidden;
+}
+.productDetailsWrap .productDisplay .imgWrap .ratingWrap .ratings .starInactive {
+    display: inline-flex;
 }

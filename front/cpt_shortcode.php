@@ -17,14 +17,15 @@ function cffapt_product_display_shortcode_fuc( $atts ) {
     
     ob_start();
 
-    ?>
+        $listHasData = check_list_has_data($cffapt_list_link);
 
-        <?php if( $cffapt_list_link ): ?>
+    ?>
+        <?php if( $listHasData ): ?>
             <div class="listLinkWrap">
                 <ol>
                     <?php foreach( $cffapt_list_link as $listLink ): ?>
                         <li>
-                            <a href="<?php echo $listLink['cffapt_link']; ?>" target="_blank" rel="noopener noreferrer"><?php echo $listLink['cffapt_title']; ?></a>
+                            <a href="<?php echo $listLink['cffapt_link']; ?>" target="_blank" rel="noopener noreferrer nofollow"><?php echo $listLink['cffapt_title']; ?></a>
                         </li>
                     <?php endforeach; ?>
                 </ol>
@@ -47,42 +48,72 @@ function cffapt_product_display_shortcode_fuc( $atts ) {
                         </div>
 
                         <div class="imgWrap">
-                            <a href="<?php echo $productDetail['cffapt_link']; ?>" target="_blank" rel="noopener noreferrer">
+                            <a href="<?php echo $productDetail['cffapt_link']; ?>" target="_blank" rel="noopener noreferrer nofollow" >
                                 <img src="<?php echo $productDetail['cffapt_image']; ?>" alt="">
                             </a>
-                            <div class="ratingWrap"></div>
+
+                            <?php $cffapt_rating = $productDetail['cffapt_rating']; ?>
+                            <?php if( $cffapt_rating ): ?>
+                            <div class="ratingWrap">
+                                Our rating:
+                                <span class="ratings">
+                                    <span class="starActive" style="width: <?php echo ($cffapt_rating/5) * 100; ?>%">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </span>
+                                    <span class="starInactive">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </span>
+                                </span>
+                                <span class="ratingCount">(<?php echo $cffapt_rating; ?> / 5)</span>
+                            </div>
+                            <?php endif; ?>
+
                             <div class="btnWrap">
-                                <a href="<?php echo $productDetail['cffapt_link']; ?>" target="_blank" rel="noopener noreferrer">Check Price On Amazon</a>
+                                <a href="<?php echo $productDetail['cffapt_link']; ?>" target="_blank" rel="noopener noreferrer nofollow">Check Price On Amazon <br/><i class="fa fa-arrow-right"></i></a>
                             </div>
                         </div>
 
                         <div class="proCronWrap">
 
-                            <div class="boxWrap proBox">
-                                <h4>Pros</h4>
-                                <div class="boxContent">
-                                    <?php if( $productDetail['cffapt_pros'] ): ?>
+                            <?php
+                                $prosHasData = check_pros_has_data($productDetail['cffapt_pros']);
+                                $consHasData = check_cons_has_data($productDetail['cffapt_cons'])
+                            ?>
+
+                            <?php if( $prosHasData ): ?>
+                                <div class="boxWrap proBox">
+                                    <h4>Pros</h4>
+                                    <div class="boxContent">
                                         <ul>
                                             <?php foreach( $productDetail['cffapt_pros'] as $pro ): ?>
                                                 <li><i class="fa fa-check" style="color:#8bb900"></i> <?php echo $pro['cffapt_pros']; ?></li>
                                             <?php endforeach; ?>
                                         </ul>
-                                    <?php endif; ?>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php endif; ?>
 
-                            <div class="boxWrap conBox">
-                                <h4>Cons</h4>
-                                <div class="boxContent">
-                                    <?php if( $productDetail['cffapt_cons'] ): ?>
+                            
+                            <?php if( $consHasData ): ?>
+                                <div class="boxWrap conBox">
+                                    <h4>Cons</h4>
+                                    <div class="boxContent">
                                         <ul>
                                             <?php foreach( $productDetail['cffapt_cons'] as $con ): ?>
                                                 <li><i class="fa fa-ban" style="color:#c00"></i> <?php echo $con['cffapt_cons']; ?></li>
                                             <?php endforeach; ?>
                                         </ul>
-                                    <?php endif; ?>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php endif; ?>
 
                         </div>
 
@@ -95,4 +126,40 @@ function cffapt_product_display_shortcode_fuc( $atts ) {
     <?php
     return ob_get_clean();
 
+}
+
+function check_list_has_data($listArr) {
+    if( $listArr ){
+        foreach( $listArr as $list ) {
+            if( $listLink['cffapt_link'] ) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+function check_pros_has_data($pros) {
+    if( $pros ){
+        foreach( $pros as $pro ) {
+            if( $pro['cffapt_pros'] ) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+function check_cons_has_data($cons) {
+    if( $cons ){
+        foreach( $cons as $con ) {
+            if( $con['cffapt_cons'] ) {
+                return true;
+            }
+        }
+    }
+
+    return false;
 }
