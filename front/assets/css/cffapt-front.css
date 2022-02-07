@@ -20,6 +20,7 @@
     counter-increment: list;
     counter-reset: list1;
     font-size: 105%;
+    background-color: #fff;
 }
 .listLinkWrap ol li:nth-child(2n) {
     background-color: #f9f9f9;
@@ -38,6 +39,14 @@
     width: 25px;
     font-weight: 700;
     font-size: 16px;
+}
+.listLinkWrap ol li a {
+    color: #fb7203;
+    text-decoration: none;
+}
+.listLinkWrap ol li a:hover {
+    color: #111;
+    border-bottom: 1px dashed #111;
 }
 .productDetailsWrap {
     margin-top: 3rem;
@@ -75,6 +84,9 @@
 .productDetailsWrap .productDisplay .contentWrap {
     line-height: 1.8;
     margin: 1rem 0 2rem;
+}
+.productDetailsWrap .productDisplay .imgWrap .btnWrap {
+    margin-top: 2rem;
 }
 .productDetailsWrap .productDisplay .imgWrap .btnWrap a {
     color: #fff;
