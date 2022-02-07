@@ -131,7 +131,7 @@ function cffapt_product_display_shortcode_fuc( $atts ) {
 function check_list_has_data($listArr) {
     if( $listArr ){
         foreach( $listArr as $list ) {
-            if( $listLink['cffapt_link'] ) {
+            if( $list['cffapt_link'] ) {
                 return true;
             }
         }

@@ -10,6 +10,7 @@
     margin: 0 4px 12px;
     border: 1px solid #ddd;
     border-top: none;
+    padding: 0;
 }
 .listLinkWrap ol li {
     list-style: none;
