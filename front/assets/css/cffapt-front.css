@@ -57,7 +57,7 @@
 .productDetailsWrap .productDisplay h3 {
     color: #000;
 }
-.productDetailsWrap .productDisplay h3 span {
+.productDetailsWrap .productDisplay h3 span.count {
     border-radius: 50%;
     background: none;
     display: block;

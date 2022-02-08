@@ -42,7 +42,7 @@ function cffapt_product_display_shortcode_fuc( $atts ) {
                     <div class="productDisplay">
 
                         <?php if( $productDetail['cffapt_title'] ): ?>
-                            <h3><span><?php echo $i; ?></span> <?php echo $productDetail['cffapt_title']; ?></h3>
+                            <h3><span class="count"><?php echo $i; ?></span> <?php echo $productDetail['cffapt_title']; ?></h3>
                         <?php endif; ?>
 
                         <div class="contentWrap">
