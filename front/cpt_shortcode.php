@@ -50,8 +50,8 @@ function cffapt_product_display_shortcode_fuc( $atts ) {
                         </div>
 
                         <div class="imgWrap">
-                            <a href="<?php echo $productDetail['cffapt_link']; ?>" target="_blank" rel="noopener noreferrer nofollow" >
-                                <img src="<?php echo $productDetail['cffapt_image']; ?>" alt="">
+                            <a href="<?php echo $productDetail['cffapt_link']; ?>" target="_blank" rel="noopener noreferrer nofollow" title="<?php echo $productDetail['cffapt_title']; ?>">
+                                <img src="<?php echo $productDetail['cffapt_image']; ?>" alt="<?php echo $productDetail['cffapt_title']; ?>">
                             </a>
 
                             <?php $cffapt_rating = $productDetail['cffapt_rating']; ?>
