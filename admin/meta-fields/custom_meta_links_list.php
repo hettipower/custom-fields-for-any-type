@@ -4,7 +4,7 @@
  * List Links = get_post_meta( get_the_ID(), 'cffapt_list_link', true )
  */
 class CFFAPT_Link_List {
-	private $configCustomFields = '{"title":"Link List Repeater","prefix":"cffapt_","domain":"cffapt","class_name":"CFFAPT_Link_List","post-type":["page"],"context":"normal","priority":"default","fields":[{"type":"checkbox","label":"Internal Links","checked":"","id":"cffapt_internal_links"}]}';
+	private $configCustomFields = '{"title":"Link List Repeater","prefix":"cffapt_","domain":"cffapt","class_name":"CFFAPT_Link_List","post-type":["page"],"context":"normal","priority":"default","fields":[{"type":"checkbox","label":"Internal Links","id":"cffapt_internal_links"}]}';
     private $config = '{"title":"Link List Repeater","prefix":"cffapt_","domain":"cffapt","class_name":"CFFAPT_Link_List","post-type":["page"],"context":"normal","priority":"default","fields":[{"type":"text","label":"Title","id":"cffapt_title"},{"type":"url","label":"Link","id":"cffapt_link"}]}';
 
 	public function __construct() {
@@ -39,7 +39,7 @@ class CFFAPT_Link_List {
             update_post_meta( $post_id, 'cffapt_list_link', $_POST['list_link'] );
         }
 
-        foreach ( $this->config['fields'] as $field ) {
+        foreach ( $this->configCustomFields['fields'] as $field ) {
 			switch ( $field['type'] ) {
                 case 'checkbox':
 					update_post_meta( $post_id, $field['id'], isset( $_POST[ $field['id'] ] ) ? $_POST[ $field['id'] ] : '' );
