@@ -4,10 +4,12 @@
  * List Links = get_post_meta( get_the_ID(), 'cffapt_list_link', true )
  */
 class CFFAPT_Link_List {
-	private $config = '{"title":"Link List Repeater","prefix":"cffapt_","domain":"cffapt","class_name":"CFFAPT_Link_List","post-type":["page"],"context":"normal","priority":"default","fields":[{"type":"text","label":"Title","id":"cffapt_title"},{"type":"url","label":"Link","id":"cffapt_link"}]}';
+	private $configCustomFields = '{"title":"Link List Repeater","prefix":"cffapt_","domain":"cffapt","class_name":"CFFAPT_Link_List","post-type":["page"],"context":"normal","priority":"default","fields":[{"type":"checkbox","label":"Internal Links","checked":"","id":"cffapt_internal_links"}]}';
+    private $config = '{"title":"Link List Repeater","prefix":"cffapt_","domain":"cffapt","class_name":"CFFAPT_Link_List","post-type":["page"],"context":"normal","priority":"default","fields":[{"type":"text","label":"Title","id":"cffapt_title"},{"type":"url","label":"Link","id":"cffapt_link"}]}';
 
 	public function __construct() {
 		$this->config = json_decode( $this->config, true );
+        $this->configCustomFields = json_decode( $this->configCustomFields, true );
 		add_action( 'add_meta_boxes', [ $this, 'add_meta_boxes' ] );
 		add_action( 'save_post', [ $this, 'save_post' ] );
 	}
@@ -37,6 +39,15 @@ class CFFAPT_Link_List {
             update_post_meta( $post_id, 'cffapt_list_link', $_POST['list_link'] );
         }
 
+        foreach ( $this->config['fields'] as $field ) {
+			switch ( $field['type'] ) {
+                case 'checkbox':
+					update_post_meta( $post_id, $field['id'], isset( $_POST[ $field['id'] ] ) ? $_POST[ $field['id'] ] : '' );
+					break;
+				default:
+			}
+		}
+
 	}
 
 	public function add_meta_box_callback() {
@@ -46,6 +57,16 @@ class CFFAPT_Link_List {
 	private function fields_table() {
         global $post;
 	?>
+        <table class="form-table" role="presentation">
+			<tbody><?php
+				foreach ( $this->configCustomFields['fields'] as $field ) {
+					?><tr>
+						<th scope="row"><?php $this->label( $field ); ?></th>
+						<td><?php $this->field( $field ); ?></td>
+					</tr><?php
+				}
+			?></tbody>
+		</table>
         <div class="repeater repeaterWrap">
             <div data-repeater-list="list_link">
                 <?php 
@@ -108,6 +129,9 @@ class CFFAPT_Link_List {
 
 	private function field( $field ) {
 		switch ( $field['type'] ) {
+            case 'checkbox':
+				$this->checkbox( $field );
+				break;
 			default:
 				$this->input( $field );
 		}
@@ -134,6 +158,29 @@ class CFFAPT_Link_List {
 			return '';
 		}
 		return str_replace( '\u0027', "'", $value );
+	}
+
+    private function checkbox( $field ) {
+		printf(
+			'<label class="rwp-checkbox-label"><input %s id="%s" name="%s" type="checkbox"> %s</label>',
+			$this->checked( $field ),
+			$field['id'], $field['id'],
+			isset( $field['description'] ) ? $field['description'] : ''
+		);
+	}
+
+    private function checked( $field ) {
+		global $post;
+		if ( metadata_exists( 'post', $post->ID, $field['id'] ) ) {
+			$value = get_post_meta( $post->ID, $field['id'], true );
+			if ( $value === 'on' ) {
+				return 'checked';
+			}
+			return '';
+		} else if ( isset( $field['checked'] ) ) {
+			return 'checked';
+		}
+		return '';
 	}
 
 }

@@ -10,24 +10,40 @@ function cffapt_product_display_shortcode_fuc( $atts ) {
     if( !$postID ) {
         return false;
     }
-
-    
-    $cffapt_list_link = get_post_meta( $postID, 'cffapt_list_link', true );
-    $cffapt_details_repeater = get_post_meta( $postID, 'cffapt_details_repeater', true );
     
     ob_start();
 
+        $cffapt_list_link = get_post_meta( $postID, 'cffapt_list_link', true );
+        $cffapt_details_repeater = get_post_meta( $postID, 'cffapt_details_repeater', true );
+        $cffapt_internal_links = get_post_meta( $postID, 'cffapt_internal_links', true );
         $listHasData = check_list_has_data($cffapt_list_link);
 
+
     ?>
-        <?php if( $listHasData ): ?>
+        <?php
+            $x=1; 
+            if( $listHasData ): 
+        ?>
             <div class="listLinkWrap">
                 <ol>
-                    <?php foreach( $cffapt_list_link as $listLink ): ?>
+                    <?php 
+                        foreach( $cffapt_list_link as $listLink ): 
+                            if( $cffapt_internal_links ) {
+                                $link = '#cffapt_product_display_'.$x;
+                            } else {
+                                $link = $listLink['cffapt_link'];
+                            }
+                    ?>
                         <li>
-                            <a href="<?php echo $listLink['cffapt_link']; ?>" target="_blank" rel="noopener noreferrer nofollow"><?php echo $listLink['cffapt_title']; ?></a>
+                            <?php
+                                if( $cffapt_internal_links ) {
+                                    echo '<a href="#cffapt_product_display_'.$x.'">'.$listLink['cffapt_title'].'</a>';
+                                } else {
+                                    echo '<a href="'.$listLink['cffapt_link'].'" target="_blank" rel="noopener noreferrer nofollow">'.$listLink['cffapt_title'].'</a>';
+                                }
+                            ?>
                         </li>
-                    <?php endforeach; ?>
+                    <?php $x++; endforeach; ?>
                 </ol>
             </div>
         <?php endif; ?>
@@ -39,7 +55,7 @@ function cffapt_product_display_shortcode_fuc( $atts ) {
             <div class="productDetailsWrap">
                 <?php foreach( $cffapt_details_repeater as $productDetail ): ?>
 
-                    <div class="productDisplay">
+                    <div class="productDisplay" id="cffapt_product_display_<?php echo $i; ?>">
 
                         <?php if( $productDetail['cffapt_title'] ): ?>
                             <h3><span class="count"><?php echo $i; ?></span> <?php echo $productDetail['cffapt_title']; ?></h3>
