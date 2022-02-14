@@ -3,7 +3,7 @@
 Plugin Name: CPT Products Display
 Plugin URI: https://github.com/hettipower
 Description: Add Custom Fields for any selected post type. Post Type can be selected manualy 
-Version: 1.0
+Version: 1.2
 Author: TharinduH
 Author URI: https://github.com/hettipower
 Text Domain: cffapt
