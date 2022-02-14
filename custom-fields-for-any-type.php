@@ -19,6 +19,7 @@ require_once CFFAPT_PATH.'/admin/options/admin_options.php';
 require_once CFFAPT_PATH.'/admin/meta-fields/custom_meta_links_list.php';
 require_once CFFAPT_PATH.'/admin/meta-fields/custom_meta_fields.php';
 require_once CFFAPT_PATH.'/admin/meta-fields/cpt_display_shortcode_meta.php';
+require_once CFFAPT_PATH.'/admin/meta-fields/cpt_comparison_boxes.php';
 //Admin Scripts
 require_once CFFAPT_PATH.'/admin/scripts/admin_scripts.php';
 //Front Scripts
@@ -26,3 +27,4 @@ require_once CFFAPT_PATH.'/admin/scripts/front_scripts.php';
 
 //ShortCode Function
 require_once CFFAPT_PATH.'/front/cpt_shortcode.php';
+require_once CFFAPT_PATH.'/front/cpt_comparison_shortcode.php';
