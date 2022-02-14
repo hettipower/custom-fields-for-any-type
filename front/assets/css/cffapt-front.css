@@ -258,3 +258,9 @@
     text-align: left;
     font-size: 15px;
 }
+
+@media screen and ( max-width: 767px ) {
+    .comparisonBoxesWrap .comparisonBoxesInnerWrap {
+        grid-template-columns: repeat(1 , 1fr);
+    }
+}
