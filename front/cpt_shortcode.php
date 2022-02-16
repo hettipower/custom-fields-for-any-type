@@ -15,38 +15,40 @@ function cffapt_product_display_shortcode_fuc( $atts ) {
 
         $cffapt_list_link = get_post_meta( $postID, 'cffapt_list_link', true );
         $cffapt_details_repeater = get_post_meta( $postID, 'cffapt_details_repeater', true );
-        $cffapt_internal_links = get_post_meta( $postID, 'cffapt_internal_links', true );
         $listHasData = check_list_has_data($cffapt_list_link);
+        $cffapt_link_settings = get_post_meta( $postID, 'cffapt_link_settings', true );
 
-
-    ?>
+    ?>  
         <?php
-            $x=1; 
-            if( $listHasData ): 
+            if( $cffapt_link_settings != 'off' ):
+                $x=1; 
+                if( $cffapt_details_repeater ): 
         ?>
             <div class="listLinkWrap">
                 <ol>
                     <?php 
-                        foreach( $cffapt_list_link as $listLink ): 
-                            if( $cffapt_internal_links ) {
+                        foreach( $cffapt_details_repeater as $productDetail ): 
+                            if( $cffapt_link_settings == 'internal_links' ) {
                                 $link = '#cffapt_product_display_'.$x;
                             } else {
-                                $link = $listLink['cffapt_link'];
+                                $link = $productDetail['cffapt_link'];
                             }
                     ?>
-                        <li>
-                            <?php
-                                if( $cffapt_internal_links ) {
-                                    echo '<a href="#cffapt_product_display_'.$x.'">'.$listLink['cffapt_title'].'</a>';
-                                } else {
-                                    echo '<a href="'.$listLink['cffapt_link'].'" target="_blank" rel="noopener noreferrer nofollow">'.$listLink['cffapt_title'].'</a>';
-                                }
-                            ?>
-                        </li>
+                        <?php if( $productDetail['cffapt_title'] ): ?>
+                            <li>
+                                <?php
+                                    if( $cffapt_link_settings == 'internal_links' ) {
+                                        echo '<a href="#cffapt_product_display_'.$x.'">'.$productDetail['cffapt_title'].'</a>';
+                                    } else {
+                                        echo '<a href="'.$productDetail['cffapt_link'].'" target="_blank" rel="noopener noreferrer nofollow">'.$productDetail['cffapt_title'].'</a>';
+                                    }
+                                ?>
+                            </li>
+                        <?php endif; ?>
                     <?php $x++; endforeach; ?>
                 </ol>
             </div>
-        <?php endif; ?>
+        <?php endif; endif; ?>
 
         <?php 
             $i=1;

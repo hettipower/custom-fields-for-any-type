@@ -2,9 +2,10 @@
 /**
  * Retrieving the values:
  * List Links = get_post_meta( get_the_ID(), 'cffapt_list_link', true )
+ * Links Settings = get_post_meta( get_the_ID(), 'cffapt_link_settings', true )
  */
 class CFFAPT_Link_List {
-	private $configCustomFields = '{"title":"Link List Repeater","prefix":"cffapt_","domain":"cffapt","class_name":"CFFAPT_Link_List","post-type":["page"],"context":"normal","priority":"default","fields":[{"type":"checkbox","label":"Internal Links","id":"cffapt_internal_links"}]}';
+	private $configCustomFields = '{"title":"Link List Repeater","prefix":"cffapt_","domain":"cffapt","class_name":"CFFAPT_Link_List","post-type":["page"],"context":"normal","priority":"default","fields":[{"type":"select","label":"Link Settings","options":"off : Off\r\ninternal_links : Internal Links\r\nexternal_links : External Links","id":"cffapt_link_settings"}]}';
     private $config = '{"title":"Link List Repeater","prefix":"cffapt_","domain":"cffapt","class_name":"CFFAPT_Link_List","post-type":["page"],"context":"normal","priority":"default","fields":[{"type":"text","label":"Title","id":"cffapt_title"},{"type":"url","label":"Link","id":"cffapt_link"}]}';
 
 	public function __construct() {
@@ -45,6 +46,11 @@ class CFFAPT_Link_List {
 					update_post_meta( $post_id, $field['id'], isset( $_POST[ $field['id'] ] ) ? $_POST[ $field['id'] ] : '' );
 					break;
 				default:
+					if ( isset( $_POST[ $field['id'] ] ) ) {
+						$sanitized = sanitize_text_field( $_POST[ $field['id'] ] );
+						update_post_meta( $post_id, $field['id'], $sanitized );
+					}
+					break;
 			}
 		}
 
@@ -67,7 +73,7 @@ class CFFAPT_Link_List {
 				}
 			?></tbody>
 		</table>
-        <div class="repeater repeaterWrap">
+        <!-- <div class="repeater repeaterWrap">
             <div data-repeater-list="list_link">
                 <?php 
                     if ( metadata_exists( 'post', $post->ID, 'cffapt_list_link' ) ): 
@@ -113,7 +119,7 @@ class CFFAPT_Link_List {
             </div>
             <input data-repeater-create type="button" value="Add" class="add"/>
             <div class="clear"></div>
-        </div>
+        </div> -->
         <?php
 	}
 
@@ -131,6 +137,9 @@ class CFFAPT_Link_List {
 		switch ( $field['type'] ) {
             case 'checkbox':
 				$this->checkbox( $field );
+				break;
+			case 'select':
+				$this->select( $field );
 				break;
 			default:
 				$this->input( $field );
@@ -181,6 +190,39 @@ class CFFAPT_Link_List {
 			return 'checked';
 		}
 		return '';
+	}
+
+	private function select( $field ) {
+		printf(
+			'<select id="%s" name="%s">%s</select>',
+			$field['id'], $field['id'],
+			$this->select_options( $field )
+		);
+	}
+
+	private function select_selected( $field, $current ) {
+		$value = $this->value( $field );
+		if ( $value === $current ) {
+			return 'selected';
+		}
+		return '';
+	}
+
+	private function select_options( $field ) {
+		$output = [];
+		$options = explode( "\r\n", $field['options'] );
+		$i = 0;
+		foreach ( $options as $option ) {
+			$pair = explode( ':', $option );
+			$pair = array_map( 'trim', $pair );
+			$output[] = sprintf(
+				'<option %s value="%s"> %s</option>',
+				$this->select_selected( $field, $pair[0] ),
+				$pair[0], $pair[1]
+			);
+			$i++;
+		}
+		return implode( '<br>', $output );
 	}
 
 }
