@@ -261,6 +261,43 @@
     text-align: left;
     font-size: 15px;
 }
+.cffapt_shortcodeWrapper .shortcodeItem {
+    margin-bottom: 2rem;
+    border: 1px solid #eee;
+    border-radius: 5px;
+}
+.cffapt_shortcodeWrapper .shortcodeItem .shortcodeContent {
+    padding: 1rem;
+    display: none;
+}
+.cffapt_shortcodeWrapper .shortcodeItem h3 {
+    margin-bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    font-size: 25px;
+    cursor: pointer;
+    padding: 18px 20px;
+}
+.cffapt_shortcodeWrapper .shortcodeItem h3 .fas {
+    margin-left: 3rem;
+    font-size: 19px;
+    transition: .15s all ease-in-out;
+    -webkit-transition: .15s all ease-in-out;
+    -moz-transition: .15s all ease-in-out;
+    -ms-transition: .15s all ease-in-out;
+    -o-transition: .15s all ease-in-out;
+    transform-origin: center center;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+}
+.cffapt_shortcodeWrapper .shortcodeItem.openAccordian h3 .fas {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+}
 
 @media screen and ( max-width: 767px ) {
     .comparisonBoxesWrap .comparisonBoxesInnerWrap {
