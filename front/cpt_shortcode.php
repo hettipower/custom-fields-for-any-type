@@ -17,6 +17,7 @@ function cffapt_product_display_shortcode_fuc( $atts ) {
         $cffapt_details_repeater = get_post_meta( $postID, 'cffapt_details_repeater', true );
         $listHasData = check_list_has_data($cffapt_list_link);
         $cffapt_link_settings = get_post_meta( $postID, 'cffapt_link_settings', true );
+        $cffapt_button_text_global = get_post_meta( $postID, 'cffapt_button_text', true );
 
     ?>  
         <?php
@@ -97,7 +98,17 @@ function cffapt_product_display_shortcode_fuc( $atts ) {
                             <?php endif; ?>
 
                             <div class="btnWrap">
-                                <a href="<?php echo $productDetail['cffapt_link']; ?>" target="_blank" rel="noopener noreferrer nofollow">Check Price On Amazon <br/><i class="fa fa-arrow-right"></i></a>
+                                <a href="<?php echo $productDetail['cffapt_link']; ?>" target="_blank" rel="noopener noreferrer nofollow">
+                                <?php
+                                    if( $cffapt_button_text_global ){
+                                        echo $cffapt_button_text_global;
+                                    } else if( $productDetail['cffapt_btn_text'] ) {
+                                        echo $productDetail['cffapt_btn_text'];
+                                    } else {
+                                        echo 'Check Price On Amazon';
+                                    }
+                                ?>
+                                <br/><i class="fa fa-arrow-right"></i></a>
                             </div>
                         </div>
 

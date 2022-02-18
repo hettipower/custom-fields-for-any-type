@@ -2,12 +2,15 @@
 /**
  * Retrieving the values:
  * Details Repeater = get_post_meta( get_the_ID(), 'cffapt_details_repeater', true )
+ * Button Text = get_post_meta( get_the_ID(), 'cffapt_button_text', true )
  */
 class CFFAPT_Post_Meta {
-	private $config = '{"title":"Details Repeater","prefix":"cffapt_","domain":"cffapt","class_name":"CFFAPT_Post_Meta","post-type":["post","page"],"context":"normal","priority":"default","cpt":"timer","fields":[{"type":"text","label":"Title","id":"cffapt_title"},{"type":"textarea","label":"Content","id":"cffapt_content"},{"type":"media","label":"Image","return":"url","id":"cffapt_image"},{"type":"number","label":"Rating","max":"5","min":"1","id":"cffapt_rating"},{"type":"url","label":"Link","id":"cffapt_link"},{"type":"text","label":"Pros","id":"cffapt_pros"},{"type":"text","label":"Cons","id":"cffapt_cons"}]}';
+	private $config = '{"title":"Details Repeater","prefix":"cffapt_","domain":"cffapt","class_name":"CFFAPT_Post_Meta","post-type":["post","page"],"context":"normal","priority":"default","cpt":"timer","fields":[{"type":"text","label":"Title","id":"cffapt_title"},{"type":"textarea","label":"Content","id":"cffapt_content"},{"type":"media","label":"Image","return":"url","id":"cffapt_image"},{"type":"number","label":"Rating","max":"5","min":"1","id":"cffapt_rating"},{"type":"text","label":"Button Text","id":"cffapt_btn_text"},{"type":"url","label":"Link","id":"cffapt_link"},{"type":"text","label":"Pros","id":"cffapt_pros"},{"type":"text","label":"Cons","id":"cffapt_cons"}]}';
+	private $configSingle = '{"title":"Details Repeater","prefix":"cffapt_","domain":"details-repeater","class_name":"Details_Repeater","post-type":["post"],"context":"normal","priority":"default","fields":[{"type":"text","label":"Button Text","id":"cffapt_button_text"}]}';
 
 	public function __construct() {
 		$this->config = json_decode( $this->config, true );
+		$this->configSingle = json_decode( $this->configSingle, true );
 		add_action( 'add_meta_boxes', [ $this, 'add_meta_boxes' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_scripts' ] );
 		add_action( 'admin_head', [ $this, 'admin_head' ] );
@@ -85,6 +88,16 @@ class CFFAPT_Post_Meta {
 		if ( isset( $_POST['cffapt_details_repeater'] ) ) {
             update_post_meta( $post_id, 'cffapt_details_repeater', $_POST['cffapt_details_repeater'] );
         }
+
+		foreach ( $this->configSingle['fields'] as $field ) {
+			switch ( $field['type'] ) {
+				default:
+					if ( isset( $_POST[ $field['id'] ] ) ) {
+						$sanitized = sanitize_text_field( $_POST[ $field['id'] ] );
+						update_post_meta( $post_id, $field['id'], $sanitized );
+					}
+			}
+		}
 	}
 
 	public function add_meta_box_callback() {
@@ -94,6 +107,16 @@ class CFFAPT_Post_Meta {
 	private function fields_table() {
 		global $post;
 	?>
+		<table class="form-table" role="presentation">
+			<tbody><?php
+				foreach ( $this->configSingle['fields'] as $field ) {
+					?><tr>
+						<th scope="row"><?php $this->label( $field ); ?></th>
+						<td><?php $this->field( $field ); ?></td>
+					</tr><?php
+				}
+			?></tbody>
+		</table>
 		<div class="repeaterNested repeaterWrap">
 			<div data-repeater-list="cffapt_details_repeater">
 
@@ -135,6 +158,13 @@ class CFFAPT_Post_Meta {
 								<label for="cffapt_rating_<?php echo $i; ?>">Rating</label>
 								<div class="contorl">
 									<input class="regular-text" id="cffapt_rating_<?php echo $i; ?>" name="cffapt_rating" type="number" value="<?php echo $cffapt_details_repeater['cffapt_rating']; ?>" min="1" max="5" >
+								</div>
+							</div>
+
+							<div class="field">
+								<label for="cffapt_btn_text_<?php echo $i; ?>">Button Text</label>
+								<div class="contorl">
+									<input class="regular-text" id="cffapt_btn_text_<?php echo $i; ?>" name="cffapt_btn_text" type="text" value="<?php echo $cffapt_details_repeater['cffapt_btn_text']; ?>">
 								</div>
 							</div>
 
