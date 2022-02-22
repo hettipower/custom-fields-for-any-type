@@ -18,12 +18,15 @@ function cffapt_faqs_shortcode_fuc( $atts ) {
     ?>  
         <?php if( $cffapt_faqs ): ?>
             <div class="cffapt_shortcodeWrapper">
-                <?php foreach( $cffapt_faqs as $faq ): ?>
-                    <div class="shortcodeItem">
-                        <h3><?php echo $faq['cffapt_question']; ?> <i class="fas fa-chevron-down"></i></h3>
-                        <div class="shortcodeContent"><?php echo $faq['cffapt_answer']; ?></div>
-                    </div>
-                <?php endforeach; ?>
+                <h2>Frequently Asked Questions</h2>
+                <div class="faqContentWrap">
+                    <?php foreach( $cffapt_faqs as $faq ): ?>
+                        <div class="shortcodeItem">
+                            <h3><?php echo $faq['cffapt_question']; ?> <i class="fas fa-chevron-down"></i></h3>
+                            <div class="shortcodeContent"><?php echo $faq['cffapt_answer']; ?></div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
             </div>
         <?php endif; ?>
 
