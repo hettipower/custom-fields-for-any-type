@@ -21,11 +21,15 @@ require_once CFFAPT_PATH.'/admin/meta-fields/custom_meta_fields.php';
 require_once CFFAPT_PATH.'/admin/meta-fields/cpt_display_shortcode_meta.php';
 require_once CFFAPT_PATH.'/admin/meta-fields/cpt_comparison_boxes.php';
 require_once CFFAPT_PATH.'/admin/meta-fields/faqs_meta_fields.php';
+require_once CFFAPT_PATH.'/admin/meta-fields/simple_menus_meta_fields.php';
+require_once CFFAPT_PATH.'/admin/meta-fields/simple_latest_post_meta_fields.php';
 
 //Admin Scripts
 require_once CFFAPT_PATH.'/admin/scripts/admin_scripts.php';
 //Front Scripts
 require_once CFFAPT_PATH.'/admin/scripts/front_scripts.php';
+
+require_once CFFAPT_PATH.'/admin/class-template-loader.php';
 
 //ShortCode Function
 require_once CFFAPT_PATH.'/front/cpt_shortcode.php';
